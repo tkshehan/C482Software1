@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="403.0" prefWidth="762.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tkshehan.c482software1.Main">
+   <children>
+      <BorderPane prefHeight="403.0" prefWidth="762.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" BorderPane.alignment="CENTER">
+               <children>
+                  <BorderPane prefHeight="200.0" prefWidth="321.0">
+                     <center>
+                        <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                     </center>
+                     <bottom>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button mnemonicParsing="false" text="Add" />
+                              <Button mnemonicParsing="false" text="Modify" />
+                              <Button mnemonicParsing="false" text="Delete" />
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                     </bottom>
+                     <top>
+                        <HBox prefHeight="23.0" prefWidth="321.0" spacing="100.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label prefHeight="25.0" prefWidth="43.0" text="Parts" />
+                              <TextField promptText="Search by Part ID or Name" />
+                           </children>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </HBox>
+                     </top>
+                  </BorderPane>
+                  <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="321.0">
+                     <center>
+                        <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                     </center>
+                     <bottom>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button mnemonicParsing="false" text="Add" />
+                              <Button mnemonicParsing="false" text="Modify" />
+                              <Button mnemonicParsing="false" text="Delete" />
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                     </bottom>
+                     <top>
+                        <HBox prefHeight="23.0" prefWidth="321.0" spacing="100.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label prefHeight="25.0" prefWidth="43.0" text="Parts" />
+                              <TextField promptText="Search by Part ID or Name" />
+                           </children>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </HBox>
+                     </top>
+                  </BorderPane>
+               </children>
+            </HBox>
+         </center>
+         <top>
+            <Label text="Inventory Management System" BorderPane.alignment="TOP_LEFT">
+               <BorderPane.margin>
+                  <Insets bottom="20.0" left="25.0" right="10.0" top="25.0" />
+               </BorderPane.margin></Label>
+         </top>
+         <bottom>
+            <Button alignment="CENTER" mnemonicParsing="false" text="Exit" textAlignment="CENTER" BorderPane.alignment="CENTER_RIGHT">
+               <BorderPane.margin>
+                  <Insets bottom="10.0" right="50.0" top="10.0" />
+               </BorderPane.margin>
+            </Button>
+         </bottom></BorderPane>
+   </children>
+</AnchorPane>
