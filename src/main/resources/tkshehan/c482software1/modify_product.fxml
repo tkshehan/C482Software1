@@ -1,14 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="tkshehan.c482software1.ModifyProduct"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="500.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tkshehan.c482software1.ModifyProduct">
+   <children>
+      <HBox layoutY="-59.0" prefHeight="500.0" prefWidth="720.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox>
+               <VBox.margin>
+                  <Insets left="50.0" right="50.0" />
+               </VBox.margin>
+               <children>
+                  <Label text="Modify Product">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+                  <VBox maxWidth="-Infinity" prefWidth="320.0" spacing="20.0">
+                     <children>
+                        <HBox maxWidth="225.0" prefHeight="25.0" prefWidth="600.0">
+                           <children>
+                              <Label text="ID" />
+                              <Pane HBox.hgrow="ALWAYS" />
+                              <TextField disable="true" maxWidth="150.0" promptText="Auto-Gen- Disabled" />
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox layoutX="35.0" layoutY="10.0" maxWidth="225.0" prefHeight="25.0" prefWidth="600.0">
+                           <children>
+                              <Label text="Name" />
+                              <Pane HBox.hgrow="ALWAYS" />
+                              <TextField maxWidth="150.0" />
+                           </children>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="10.0" maxWidth="225.0" prefHeight="25.0" prefWidth="600.0">
+                           <children>
+                              <Label text="Inv" />
+                              <Pane HBox.hgrow="ALWAYS" />
+                              <TextField maxWidth="75.0">
+                                 <HBox.margin>
+                                    <Insets right="75.0" />
+                                 </HBox.margin></TextField>
+                           </children>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="10.0" maxWidth="225.0" prefHeight="25.0" prefWidth="600.0">
+                           <children>
+                              <Label text="Price" />
+                              <Pane HBox.hgrow="ALWAYS" />
+                              <TextField maxWidth="75.0">
+                                 <HBox.margin>
+                                    <Insets right="75.0" />
+                                 </HBox.margin></TextField>
+                           </children>
+                        </HBox>
+                        <HBox spacing="25.0">
+                           <children>
+                              <HBox maxWidth="225.0" prefHeight="25.0" prefWidth="600.0">
+                                 <children>
+                                    <Label text="Max" />
+                                    <Pane HBox.hgrow="ALWAYS" />
+                                    <TextField maxWidth="75.0">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin></TextField>
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="10.0" maxWidth="200.0" prefHeight="25.0" prefWidth="600.0">
+                                 <children>
+                                    <Label text="Min" />
+                                    <Pane HBox.hgrow="ALWAYS" />
+                                    <TextField maxWidth="75.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="40.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="20.0" top="25.0" />
+                     </padding>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="25.0" top="20.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="CENTER_RIGHT" spacing="10.0" HBox.hgrow="SOMETIMES">
+               <children>
+                  <TextField maxWidth="200.0" nodeOrientation="LEFT_TO_RIGHT" promptText="Search By Part ID or Name" />
+                  <TableView prefHeight="200.0" prefWidth="200.0" />
+                  <Button mnemonicParsing="false" text="Add">
+                     <VBox.margin>
+                        <Insets right="15.0" />
+                     </VBox.margin></Button>
+                  <TableView prefHeight="200.0" prefWidth="200.0" />
+                  <Button mnemonicParsing="false" text="Remove Associated Part">
+                     <VBox.margin>
+                        <Insets right="15.0" />
+                     </VBox.margin></Button>
+                  <HBox alignment="CENTER_RIGHT" spacing="52.0">
+                     <children>
+                        <Button mnemonicParsing="false" text="Save" />
+                        <Button mnemonicParsing="false" text="Cancel" />
+                     </children>
+                     <VBox.margin>
+                        <Insets right="15.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin></VBox>
+         </children>
+      </HBox>
+   </children>
 </AnchorPane>
