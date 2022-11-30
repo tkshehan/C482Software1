@@ -1,5 +1,6 @@
 package tkshehan.c482software1;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,5 +44,15 @@ public class MainController {
         Scene scene = new Scene(root, 900, 480);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void deletePart(ActionEvent actionEvent) {
+    }
+
+    public void deleteProduct(ActionEvent actionEvent) {
+    }
+
+    public void quit(ActionEvent actionEvent) {
+        Platform.exit();
     }
 }

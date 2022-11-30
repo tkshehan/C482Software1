@@ -89,8 +89,8 @@
                 </VBox>
                 <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="35.0">
                     <children>
-                        <Button mnemonicParsing="false" text="Save" />
-                        <Button mnemonicParsing="false" text="Cancel" />
+                        <Button mnemonicParsing="false" onAction="#savePart" text="Save" />
+                        <Button mnemonicParsing="false" onAction="#toMain" text="Cancel" />
                     </children>
                     <VBox.margin>
                         <Insets bottom="50.0" left="50.0" right="100.0" top="50.0" />

@@ -5,10 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="tkshehan.c482software1.AddProduct"
-            prefHeight="500.0" prefWidth="720.0">
+<AnchorPane prefHeight="500.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tkshehan.c482software1.AddProduct">
     <children>
         <HBox layoutY="-59.0" prefHeight="457.0" prefWidth="721.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -102,19 +99,19 @@
                     <children>
                         <TextField maxWidth="200.0" nodeOrientation="LEFT_TO_RIGHT" promptText="Search By Part ID or Name" />
                         <TableView prefHeight="200.0" prefWidth="200.0" />
-                        <Button mnemonicParsing="false" text="Add">
+                        <Button mnemonicParsing="false" onAction="#addAssociatedPart" text="Add">
                             <VBox.margin>
                                 <Insets right="15.0" />
                             </VBox.margin></Button>
                         <TableView prefHeight="200.0" prefWidth="200.0" />
-                        <Button mnemonicParsing="false" text="Remove Associated Part">
+                        <Button mnemonicParsing="false" onAction="#removeAssociatedPart" text="Remove Associated Part">
                             <VBox.margin>
                                 <Insets right="15.0" />
                             </VBox.margin></Button>
                         <HBox alignment="CENTER_RIGHT" spacing="52.0">
                             <children>
-                                <Button mnemonicParsing="false" text="Save" />
-                                <Button mnemonicParsing="false" text="Cancel" />
+                                <Button mnemonicParsing="false" onAction="#saveProduct" text="Save" />
+                                <Button mnemonicParsing="false" onAction="#toMain" text="Cancel" />
                             </children>
                             <VBox.margin>
                                 <Insets right="15.0" />

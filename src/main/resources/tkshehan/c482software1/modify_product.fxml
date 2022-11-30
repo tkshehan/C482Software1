@@ -99,18 +99,18 @@
                <children>
                   <TextField maxWidth="200.0" nodeOrientation="LEFT_TO_RIGHT" promptText="Search By Part ID or Name" />
                   <TableView prefHeight="200.0" prefWidth="200.0" />
-                  <Button mnemonicParsing="false" text="Add">
+                  <Button mnemonicParsing="false" onAction="#addAssociatedPart" text="Add">
                      <VBox.margin>
                         <Insets right="15.0" />
                      </VBox.margin></Button>
                   <TableView prefHeight="200.0" prefWidth="200.0" />
-                  <Button mnemonicParsing="false" text="Remove Associated Part">
+                  <Button mnemonicParsing="false" onAction="#removeAssociatedPart" text="Remove Associated Part">
                      <VBox.margin>
                         <Insets right="15.0" />
                      </VBox.margin></Button>
                   <HBox alignment="CENTER_RIGHT" spacing="52.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Save" />
+                        <Button mnemonicParsing="false" onAction="#saveProduct" text="Save" />
                         <Button mnemonicParsing="false" text="Cancel" />
                      </children>
                      <VBox.margin>
