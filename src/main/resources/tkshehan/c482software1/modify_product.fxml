@@ -111,7 +111,7 @@
                   <HBox alignment="CENTER_RIGHT" spacing="52.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#saveProduct" text="Save" />
-                        <Button mnemonicParsing="false" text="Cancel" />
+                        <Button mnemonicParsing="false" onAction="#toMain" text="Cancel" />
                      </children>
                      <VBox.margin>
                         <Insets right="15.0" />
