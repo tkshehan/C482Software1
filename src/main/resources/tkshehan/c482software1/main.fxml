@@ -18,8 +18,8 @@
                      <bottom>
                         <HBox alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button mnemonicParsing="false" text="Add" />
-                              <Button mnemonicParsing="false" text="Modify" />
+                              <Button mnemonicParsing="false" onAction="#toAddPart" text="Add" />
+                              <Button mnemonicParsing="false" onAction="#toModifyPart" text="Modify" />
                               <Button mnemonicParsing="false" text="Delete" />
                            </children>
                            <padding>
@@ -49,8 +49,8 @@
                      <bottom>
                         <HBox alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button mnemonicParsing="false" text="Add" />
-                              <Button mnemonicParsing="false" text="Modify" />
+                              <Button mnemonicParsing="false" onAction="#toAddProduct" text="Add" />
+                              <Button mnemonicParsing="false" onAction="#toModifyProduct" text="Modify" />
                               <Button mnemonicParsing="false" text="Delete" />
                            </children>
                            <padding>
