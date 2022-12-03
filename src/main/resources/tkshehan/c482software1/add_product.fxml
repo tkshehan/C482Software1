@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tkshehan.c482software1.controller.AddProduct">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tkshehan.c482software1.controller.AddProduct">
     <children>
         <HBox layoutY="-59.0" prefHeight="457.0" prefWidth="721.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -98,12 +98,24 @@
                 <VBox alignment="CENTER_RIGHT" spacing="10.0" HBox.hgrow="SOMETIMES">
                     <children>
                         <TextField maxWidth="200.0" nodeOrientation="LEFT_TO_RIGHT" promptText="Search By Part ID or Name" />
-                        <TableView prefHeight="200.0" prefWidth="200.0" />
+                        <TableView prefHeight="200.0" prefWidth="200.0">
+                     <columns>
+                        <TableColumn prefWidth="75.0" text="Part ID" />
+                        <TableColumn prefWidth="110.0" text="Part Name" />
+                        <TableColumn prefWidth="110.0" text="Inventory Level" />
+                        <TableColumn minWidth="-1.0" prefWidth="118.00001017252606" text="Price/Cost per Unit" />
+                     </columns></TableView>
                         <Button mnemonicParsing="false" onAction="#addAssociatedPart" text="Add">
                             <VBox.margin>
                                 <Insets right="15.0" />
                             </VBox.margin></Button>
-                        <TableView prefHeight="200.0" prefWidth="200.0" />
+                        <TableView prefHeight="200.0" prefWidth="200.0">
+                            <columns>
+                                <TableColumn prefWidth="75.0" text="Part ID" />
+                                <TableColumn prefWidth="110.0" text="Part Name" />
+                                <TableColumn prefWidth="110.0" text="Inventory Level" />
+                                <TableColumn minWidth="-1.0" prefWidth="118.00001017252606" text="Price/Cost per Unit" />
+                            </columns></TableView>
                         <Button mnemonicParsing="false" onAction="#removeAssociatedPart" text="Remove Associated Part">
                             <VBox.margin>
                                 <Insets right="15.0" />
