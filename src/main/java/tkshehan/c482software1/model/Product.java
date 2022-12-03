@@ -11,7 +11,7 @@ public class Product {
     private int max = 1;
     private ArrayList<Part> partsList = new ArrayList<>();
 
-    private void Product(int id, String name, int inventory, double price, int min, int max, ArrayList<Part> partsList) {
+    public Product(int id, String name, int inventory, double price, int min, int max, ArrayList<Part> partsList) {
     this.id = id;
     this.name = name;
     this.inventory = inventory;

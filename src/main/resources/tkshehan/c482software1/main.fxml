@@ -32,7 +32,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font></Label>
                               <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                              <TextField prefWidth="200.0" promptText="Search by Part ID or Name" />
+                              <TextField prefWidth="205.0" promptText="Search by Part ID or Name" />
                            </children>
                            <padding>
                               <Insets left="10.0" />
@@ -71,7 +71,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font></Label>
                               <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                              <TextField prefWidth="200.0" promptText="Search by Product ID or Name" />
+                              <TextField prefWidth="205.0" promptText="Search by Product ID or Name" />
                            </children>
                            <padding>
                               <Insets left="10.0" />
@@ -83,8 +83,8 @@
                           <columns>
                             <TableColumn fx:id="productIdCol" prefWidth="75.0" text="Product ID" />
                             <TableColumn fx:id="productNameCol" prefWidth="102.33332061767578" text="Product Name" />
-                              <TableColumn fx:id="productInvCol" prefWidth="111.99998474121094" text="Inventory Level" />
-                              <TableColumn fx:id="productPriceCol" prefWidth="134.66668701171875" text="Price/Cost per Unit" />
+                            <TableColumn fx:id="productInvCol" prefWidth="111.99998474121094" text="Inventory Level" />
+                            <TableColumn fx:id="productPriceCol" prefWidth="134.66668701171875" text="Price/Cost per Unit" />
                           </columns>
                         </TableView>
                      </center>

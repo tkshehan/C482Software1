@@ -17,7 +17,7 @@ public class ModifyPart {
     public void toMain(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/tkshehan/c482software1/main.fxml"));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 900, 480);
+        Scene scene = new Scene(root, 1000, 480);
         stage.setScene(scene);
         stage.show();
     }

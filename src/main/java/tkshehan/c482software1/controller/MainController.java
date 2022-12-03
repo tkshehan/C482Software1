@@ -13,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import tkshehan.c482software1.model.InhousePart;
 import tkshehan.c482software1.model.Part;
 import tkshehan.c482software1.model.Product;
 
@@ -36,23 +37,32 @@ public class MainController implements Initializable {
     public TableColumn productInvCol;
     public TableColumn productPriceCol;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-    partsTable.setItems(partsList);
-    partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-    partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-    partInvCol.setCellValueFactory(new PropertyValueFactory<>("inventory"));
-    partCostCol.setCellValueFactory(new PropertyValueFactory<>("cost"));
+        partsTable.setItems(partsList);
+        partIdCol.setCellValueFactory(new PropertyValueFactory<>("Id"));
+        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partInvCol.setCellValueFactory(new PropertyValueFactory<>("inventory"));
+        partCostCol.setCellValueFactory(new PropertyValueFactory<>("cost"));
 
-    productsTable.setItems(productList);
-    productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-    productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-    productInvCol.setCellValueFactory(new PropertyValueFactory<>("inventory"));
-    productPriceCol.setCellValueFactory(new PropertyValueFactory<>("cost"));
+        productsTable.setItems(productList);
+        productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productInvCol.setCellValueFactory(new PropertyValueFactory<>("inventory"));
+        productPriceCol.setCellValueFactory(new PropertyValueFactory<>("cost"));
+
+        Part testPart = new InhousePart(1, "test", 1.0, 10, 1, 10, 1);
+        partsList.add(testPart);
     }
 
     public void toAddPart(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/tkshehan/c482software1/add_part.fxml"));
+        FXMLLoader  loader = new FXMLLoader(getClass().getResource("/tkshehan/c482software1/add_part.fxml"));
+        Parent root = loader.load();
+
+        AddPart controller = loader.getController();
+        controller.setPartsList(partsList);
+
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 480);
         stage.setScene(scene);
@@ -61,7 +71,8 @@ public class MainController implements Initializable {
     }
 
     public void toModifyPart(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/tkshehan/c482software1/add_product.fxml"));
+        FXMLLoader  loader = new FXMLLoader(getClass().getResource("/tkshehan/c482software1/modify_part.fxml"));
+        Parent root = loader.load();
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 480);
         stage.setScene(scene);
@@ -69,7 +80,8 @@ public class MainController implements Initializable {
     }
 
     public void toAddProduct(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/tkshehan/c482software1/add_product.fxml"));
+        FXMLLoader  loader = new FXMLLoader(getClass().getResource("/tkshehan/c482software1/add_product.fxml"));
+        Parent root = loader.load();
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 480);
         stage.setScene(scene);
@@ -77,7 +89,8 @@ public class MainController implements Initializable {
     }
 
     public void toModifyProduct(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/tkshehan/c482software1/modify_product.fxml"));
+        FXMLLoader  loader = new FXMLLoader(getClass().getResource("/tkshehan/c482software1/modify_product.fxml"));
+        Parent root = loader.load();
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 480);
         stage.setScene(scene);
