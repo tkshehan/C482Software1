@@ -12,11 +12,7 @@ import tkshehan.c482software1.model.Part;
 import java.io.IOException;
 
 public class AddPart {
-    private ObservableList<Part> partsList;
 
-    public void setPartsList(ObservableList<Part> partsList) {
-        this.partsList = partsList;
-    }
     public void savePart(ActionEvent actionEvent) {
     }
 

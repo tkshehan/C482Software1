@@ -21,4 +21,20 @@ public class Product {
     this.partsList = partsList;
     }
 
+    public int getId() {return id;}
+
+    public String getName() {return name;}
+    public void setName(String name) {this.name = name;}
+
+    public int getInventory() {return inventory;}
+    public void setInventory(int inventory) {this.inventory = inventory;}
+
+    public double getPrice() {return price;}
+    public void setPrice(double price) {this.price = price;}
+
+    public int getMin() {return min;}
+    public void setMin(int min) {this.min = min;}
+
+    public int getMax() {return max;}
+    public void setMax(int max) {this.max = max;}
 }

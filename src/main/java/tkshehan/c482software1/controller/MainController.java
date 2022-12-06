@@ -41,7 +41,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         partsTable.setItems(partsList);
-        partIdCol.setCellValueFactory(new PropertyValueFactory<>("Id"));
+        partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         partInvCol.setCellValueFactory(new PropertyValueFactory<>("inventory"));
         partCostCol.setCellValueFactory(new PropertyValueFactory<>("cost"));
@@ -60,9 +60,6 @@ public class MainController implements Initializable {
         FXMLLoader  loader = new FXMLLoader(getClass().getResource("/tkshehan/c482software1/add_part.fxml"));
         Parent root = loader.load();
 
-        AddPart controller = loader.getController();
-        controller.setPartsList(partsList);
-
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 480);
         stage.setScene(scene);
@@ -73,6 +70,7 @@ public class MainController implements Initializable {
     public void toModifyPart(ActionEvent actionEvent) throws IOException {
         FXMLLoader  loader = new FXMLLoader(getClass().getResource("/tkshehan/c482software1/modify_part.fxml"));
         Parent root = loader.load();
+
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 480);
         stage.setScene(scene);
@@ -82,6 +80,10 @@ public class MainController implements Initializable {
     public void toAddProduct(ActionEvent actionEvent) throws IOException {
         FXMLLoader  loader = new FXMLLoader(getClass().getResource("/tkshehan/c482software1/add_product.fxml"));
         Parent root = loader.load();
+
+        AddProduct controller = loader.getController();
+        controller.setPartsList(partsList);
+
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 480);
         stage.setScene(scene);
@@ -91,6 +93,10 @@ public class MainController implements Initializable {
     public void toModifyProduct(ActionEvent actionEvent) throws IOException {
         FXMLLoader  loader = new FXMLLoader(getClass().getResource("/tkshehan/c482software1/modify_product.fxml"));
         Parent root = loader.load();
+
+        ModifyProduct controller = loader.getController();
+        controller.setPartsList(partsList);
+
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 480);
         stage.setScene(scene);

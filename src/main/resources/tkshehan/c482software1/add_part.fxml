@@ -61,14 +61,14 @@
                      <children>
                         <HBox maxWidth="250.0" prefHeight="25.0" prefWidth="600.0">
                            <children>
-                              <Label text="Max" />
+                              <Label text="Min" />
                               <Pane HBox.hgrow="ALWAYS" />
                               <TextField />
                            </children>
                         </HBox>
                         <HBox layoutX="10.0" layoutY="10.0" maxWidth="200.0" prefHeight="25.0" prefWidth="600.0">
                            <children>
-                              <Label text="Min" />
+                              <Label text="Max" />
                               <Pane HBox.hgrow="ALWAYS" />
                               <TextField />
                            </children>
