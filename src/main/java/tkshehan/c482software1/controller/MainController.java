@@ -50,7 +50,7 @@ public class MainController implements Initializable {
         productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         productInvCol.setCellValueFactory(new PropertyValueFactory<>("inventory"));
-        productPriceCol.setCellValueFactory(new PropertyValueFactory<>("cost"));
+        productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
     public void setState(ObservableList<Part> parts, ObservableList<Product> products) {
@@ -72,6 +72,8 @@ public class MainController implements Initializable {
     }
 
     public void toModifyPart(ActionEvent actionEvent) throws IOException {
+        // Check for highlighted part
+
         FXMLLoader  loader = new FXMLLoader(getClass().getResource("/tkshehan/c482software1/modify_part.fxml"));
         Parent root = loader.load();
 
@@ -98,6 +100,8 @@ public class MainController implements Initializable {
     }
 
     public void toModifyProduct(ActionEvent actionEvent) throws IOException {
+        // Check for highlighted Product
+
         FXMLLoader  loader = new FXMLLoader(getClass().getResource("/tkshehan/c482software1/modify_product.fxml"));
         Parent root = loader.load();
 
@@ -111,15 +115,28 @@ public class MainController implements Initializable {
         stage.show();
     }
 
+    public void modify(Product product) {
+        // add or modify product
+        // check for existing id
+    }
+
+    public void modify(Part part) {
+        // add or modify part
+        //check for existing id
+    }
+
     public void deletePart(ActionEvent actionEvent) {
+        // Check for highlighted part
+        // Delete part
     }
 
     public void deleteProduct(ActionEvent actionEvent) {
+        // Check for highlighted product
+        // Delete Product
     }
 
     public void quit(ActionEvent actionEvent) {
         Platform.exit();
     }
-
 
 }
