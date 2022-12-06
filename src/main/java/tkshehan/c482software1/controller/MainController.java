@@ -23,14 +23,14 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
-    private ObservableList<Part> partsList = FXCollections.observableArrayList();
+    static private ObservableList<Part> partsList;
     public TableView partsTable;
     public TableColumn partIdCol;
     public TableColumn partNameCol;
     public TableColumn partInvCol;
     public TableColumn partCostCol;
 
-    private ObservableList<Product> productList = FXCollections.observableArrayList();
+    static private ObservableList<Product> productList;
     public TableView productsTable;
     public TableColumn productIdCol;
     public TableColumn productNameCol;
@@ -51,9 +51,13 @@ public class MainController implements Initializable {
         productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         productInvCol.setCellValueFactory(new PropertyValueFactory<>("inventory"));
         productPriceCol.setCellValueFactory(new PropertyValueFactory<>("cost"));
+    }
 
-        Part testPart = new InhousePart(1, "test", 1.0, 10, 1, 10, 1);
-        partsList.add(testPart);
+    public void setState(ObservableList<Part> parts, ObservableList<Product> products) {
+        this.partsList = parts;
+        this.productList = products;
+        partsTable.setItems(partsList);
+        productsTable.setItems(productList);
     }
 
     public void toAddPart(ActionEvent actionEvent) throws IOException {
@@ -70,6 +74,9 @@ public class MainController implements Initializable {
     public void toModifyPart(ActionEvent actionEvent) throws IOException {
         FXMLLoader  loader = new FXMLLoader(getClass().getResource("/tkshehan/c482software1/modify_part.fxml"));
         Parent root = loader.load();
+
+        ModifyPart controller = loader.getController();
+        // Send Highlighted Part
 
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 480);
@@ -96,6 +103,7 @@ public class MainController implements Initializable {
 
         ModifyProduct controller = loader.getController();
         controller.setPartsList(partsList);
+        // Send Highlighted Product
 
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 480);

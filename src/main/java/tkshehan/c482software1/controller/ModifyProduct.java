@@ -12,6 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import tkshehan.c482software1.model.Part;
+import tkshehan.c482software1.model.Product;
 
 import java.io.IOException;
 
@@ -21,14 +22,16 @@ public class ModifyProduct {
     public TableColumn allPartsNameCol;
     public TableColumn allPartsInvCol;
     public TableColumn allPartsCostCol;
+
     public TableView asPartsTable;
     public TableColumn asPartsIdCol;
     public TableColumn asPartsNameCol;
     public TableColumn asPartsInvCol;
     public TableColumn asPartsCostCol;
+
     private ObservableList<Part> partsList;
     private ObservableList<Part> associatedPartsList = FXCollections.observableArrayList();
-
+    private Product product;
     public void addAssociatedPart(ActionEvent actionEvent) {
     }
 
@@ -36,6 +39,9 @@ public class ModifyProduct {
     }
 
     public void saveProduct(ActionEvent actionEvent) {
+        // Validate Product
+
+        // Save Product
     }
 
     public void toMain(ActionEvent actionEvent) throws IOException {
@@ -60,5 +66,9 @@ public class ModifyProduct {
         asPartsNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         asPartsInvCol.setCellValueFactory(new PropertyValueFactory<>("inventory"));
         asPartsCostCol.setCellValueFactory(new PropertyValueFactory<>("cost"));
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

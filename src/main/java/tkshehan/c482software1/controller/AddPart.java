@@ -14,6 +14,10 @@ import java.io.IOException;
 public class AddPart {
 
     public void savePart(ActionEvent actionEvent) {
+        // Validate Part
+
+        // Save Part
+        // In-house or Outsourced?
     }
 
     public void toMain(ActionEvent actionEvent) throws IOException {
