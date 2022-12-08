@@ -1,6 +1,7 @@
 package tkshehan.c482software1.controller;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +11,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import tkshehan.c482software1.model.Part;
 import tkshehan.c482software1.model.Product;
@@ -22,6 +25,7 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
 
     static private ObservableList<Part> partsList;
+    public TextField partsQuery;
     public TableView partsTable;
     public TableColumn partIdCol;
     public TableColumn partNameCol;
@@ -29,6 +33,7 @@ public class MainController implements Initializable {
     public TableColumn partCostCol;
 
     static private ObservableList<Product> productList;
+    public TextField productQuery;
     public TableView productsTable;
     public TableColumn productIdCol;
     public TableColumn productNameCol;
@@ -159,5 +164,83 @@ public class MainController implements Initializable {
     public void quit(ActionEvent actionEvent) {
         Platform.exit();
     }
+
+
+    public void partSearch(KeyEvent keyEvent) {
+        ObservableList<Part> searchList = FXCollections.observableArrayList();
+        String query = partsQuery.getText().toLowerCase();
+        searchList = searchPartName(query);
+        if (searchList.size() == 0) {
+            try {
+                int queryId = Integer.parseInt(query);
+                Part p = searchPartId(queryId);
+                if (p != null) {
+                    searchList.add(p);
+                }
+            } catch (NumberFormatException e) {
+                // Ignore
+            }
+        }
+
+        partsTable.setItems(searchList);
+    }
+
+    private ObservableList<Part> searchPartName(String partialName) {
+        ObservableList<Part> namedParts = FXCollections.observableArrayList();
+        for (Part p : partsList) {
+            if(p.getName().toLowerCase().contains(partialName)) {
+                namedParts.add(p);
+            }
+        }
+        return namedParts;
+    }
+
+    private Part searchPartId(int id) {
+        for (Part p : partsList) {
+            if (p.getId() == id) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public void productSearch(KeyEvent keyEvent) {
+        ObservableList<Product> searchList = FXCollections.observableArrayList();
+        String query = productQuery.getText().toLowerCase();
+        searchList = searchProductName(query);
+        if (searchList.size() == 0) {
+            try {
+                int queryId = Integer.parseInt(query);
+                Product p = searchProductId(queryId);
+                if (p != null) {
+                    searchList.add(p);
+                }
+            } catch (NumberFormatException e) {
+                // Ignore
+            }
+        }
+
+        productsTable.setItems(searchList);
+    }
+
+    private  ObservableList<Product> searchProductName(String partialName) {
+        ObservableList<Product> namedProducts = FXCollections.observableArrayList();
+        for (Product p : productList) {
+            if(p.getName().toLowerCase().contains(partialName)) {
+                namedProducts.add(p);
+            }
+        }
+        return  namedProducts;
+    }
+
+    private Product searchProductId(int id) {
+        for (Product p : productList) {
+            if (p.getId() == id) {
+                return p;
+            }
+        }
+        return null;
+    }
+
 
 }

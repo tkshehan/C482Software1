@@ -16,8 +16,10 @@ public class AddPart {
     public void savePart(ActionEvent actionEvent) {
         // Validate Part
 
-        // Save Part
         // In-house or Outsourced?
+
+        // Add part to data
+
     }
 
     public void toMain(ActionEvent actionEvent) throws IOException {
