@@ -1,7 +1,6 @@
 package tkshehan.c482software1.controller;
 
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +12,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import tkshehan.c482software1.model.InhousePart;
 import tkshehan.c482software1.model.Part;
 import tkshehan.c482software1.model.Product;
 
@@ -68,11 +66,11 @@ public class MainController implements Initializable {
         Scene scene = new Scene(root, 900, 480);
         stage.setScene(scene);
         stage.show();
-
     }
 
     public void toModifyPart(ActionEvent actionEvent) throws IOException {
-        // Check for highlighted part
+        Part selectedPart = (Part)partsTable.getSelectionModel().getSelectedItem();
+        if (selectedPart == null) return;
 
         FXMLLoader  loader = new FXMLLoader(getClass().getResource("/tkshehan/c482software1/modify_part.fxml"));
         Parent root = loader.load();
@@ -100,7 +98,8 @@ public class MainController implements Initializable {
     }
 
     public void toModifyProduct(ActionEvent actionEvent) throws IOException {
-        // Check for highlighted Product
+        Product selectedProduct = (Product)productsTable.getSelectionModel().getSelectedItem();
+        if (selectedProduct == null) return;
 
         FXMLLoader  loader = new FXMLLoader(getClass().getResource("/tkshehan/c482software1/modify_product.fxml"));
         Parent root = loader.load();
@@ -116,23 +115,45 @@ public class MainController implements Initializable {
     }
 
     public void modify(Product product) {
-        // add or modify product
-        // check for existing id
+        int index = -1;
+        for(int i = 0; i < productList.size(); i++) {
+            if (productList.get(i).getId() == product.getId()) {
+                index = i;
+                break;
+            }
+        }
+        if (index == -1) {
+            productList.add(product);
+        } else {
+            productList.set(index, product);
+        }
     }
 
     public void modify(Part part) {
-        // add or modify part
-        //check for existing id
+        int index = -1;
+        for(int i = 0; i < partsList.size(); i++) {
+            if (partsList.get(i).getId() == part.getId()) {
+                index = i;
+                break;
+            }
+        }
+        if (index == -1) {
+            partsList.add(part);
+        } else {
+            partsList.set(index, part);
+        }
     }
 
     public void deletePart(ActionEvent actionEvent) {
-        // Check for highlighted part
-        // Delete part
+        Part selectedPart = (Part)partsTable.getSelectionModel().getSelectedItem();
+        if (selectedPart == null) return;
+        partsList.remove(selectedPart);
     }
 
     public void deleteProduct(ActionEvent actionEvent) {
-        // Check for highlighted product
-        // Delete Product
+        Product selectedProduct = (Product)productsTable.getSelectionModel().getSelectedItem();
+        if (selectedProduct == null) return;
+        productList.remove(selectedProduct);
     }
 
     public void quit(ActionEvent actionEvent) {
