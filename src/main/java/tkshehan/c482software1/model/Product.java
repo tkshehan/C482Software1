@@ -1,5 +1,7 @@
 package tkshehan.c482software1.model;
 
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 
 public class Product {
@@ -10,6 +12,8 @@ public class Product {
     private int min = 0;
     private int max = 1;
     private ArrayList<Part> partsList = new ArrayList<>();
+
+    public static ObservableList<Product> productList;
 
     public Product(int id, String name, int inventory, double price, int min, int max, ArrayList<Part> partsList) {
     this.id = id;

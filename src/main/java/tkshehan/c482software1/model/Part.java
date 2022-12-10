@@ -1,20 +1,41 @@
 package tkshehan.c482software1.model;
 
-public abstract class Part {
-    private int id;
-    private String name = "";
-    private double cost = 00.00;
-    private int inventory = 0;
-    private int max = 1;
-    private int min = 0;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-    public Part(int id, String name, double cost, int inventory, int min, int max) {
-        this.id = id;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+public abstract class Part {
+    private int id; //must be a unique number
+    private String name = ""; //must not be empty
+    private double cost = 00.00; //must be a double
+    private int inventory = 0;  //must be >= 0
+    private int max = 1; //must be greater than min
+    private int min = 0; //must be >= 0
+
+    public static ObservableList<Part> partsList = FXCollections.observableArrayList();
+
+    public Part(String name, double cost, int inventory, int min, int max) {
+        this.id = newId();
         this.name = name;
         this.cost = cost;
         this.inventory = inventory;
         this.min = min;
         this.max = max;
+
+        partsList.add(this);
+    }
+
+    private int newId() {
+        ArrayList idList = (ArrayList) partsList
+                .stream()
+                .map(Part::getId)
+                .collect(Collectors.toList());
+        for( int i = 0; ; i++) {
+            if(!idList.contains(i))
+            return i;
+        }
     }
 
     public int getId() {return id;}

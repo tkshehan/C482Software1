@@ -15,8 +15,11 @@
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font></Label>
-                  <RadioButton mnemonicParsing="false" selected="true" text="In-House" />
-                  <RadioButton mnemonicParsing="false" text="Outsourced" />
+                  <RadioButton fx:id="inHouse" mnemonicParsing="false" onAction="#onInHouse" selected="true" text="In-House">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="origin" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="outsourced" mnemonicParsing="false" onAction="#onOutsourced" text="Outsourced" toggleGroup="$origin" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -40,21 +43,21 @@
                      <children>
                         <Label text="Name" />
                         <Pane HBox.hgrow="ALWAYS" />
-                        <TextField />
+                        <TextField fx:id="nameTF" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="10.0" maxWidth="250.0" prefHeight="25.0" prefWidth="600.0">
                      <children>
                         <Label text="Inv" />
                         <Pane HBox.hgrow="ALWAYS" />
-                        <TextField />
+                        <TextField fx:id="invTF" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="10.0" maxWidth="250.0" prefHeight="25.0" prefWidth="600.0">
                      <children>
                         <Label text="Price/Cost" />
                         <Pane HBox.hgrow="ALWAYS" />
-                        <TextField />
+                        <TextField fx:id="priceTF" />
                      </children>
                   </HBox>
                   <HBox spacing="25.0">
@@ -63,23 +66,23 @@
                            <children>
                               <Label text="Min" />
                               <Pane HBox.hgrow="ALWAYS" />
-                              <TextField />
+                              <TextField fx:id="minTF" />
                            </children>
                         </HBox>
                         <HBox layoutX="10.0" layoutY="10.0" maxWidth="200.0" prefHeight="25.0" prefWidth="600.0">
                            <children>
                               <Label text="Max" />
                               <Pane HBox.hgrow="ALWAYS" />
-                              <TextField />
+                              <TextField fx:id="maxTF" />
                            </children>
                         </HBox>
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="10.0" maxWidth="250.0" prefHeight="25.0" prefWidth="600.0">
                      <children>
-                        <Label text="MachineID" />
+                        <Label fx:id="sourceLabel" text="MachineID" />
                         <Pane HBox.hgrow="ALWAYS" />
-                        <TextField />
+                        <TextField fx:id="originTF" />
                      </children>
                   </HBox>
                </children>
@@ -90,7 +93,7 @@
             <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="35.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#savePart" text="Save" />
-                  <Button mnemonicParsing="false" onAction="#toMain" text="Cancel" />
+                  <Button fx:id="exitButton" mnemonicParsing="false" onAction="#toMain" text="Cancel" />
                </children>
                <VBox.margin>
                   <Insets bottom="50.0" left="50.0" right="100.0" top="50.0" />

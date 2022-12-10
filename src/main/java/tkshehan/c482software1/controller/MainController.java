@@ -24,15 +24,13 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
-    static private ObservableList<Part> partsList;
     public TextField partsQuery;
     public TableView partsTable;
     public TableColumn partIdCol;
     public TableColumn partNameCol;
     public TableColumn partInvCol;
     public TableColumn partCostCol;
-
-    static private ObservableList<Product> productList;
+    
     public TextField productQuery;
     public TableView productsTable;
     public TableColumn productIdCol;
@@ -43,24 +41,22 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        partsTable.setItems(partsList);
+        partsTable.setItems(Part.partsList);
         partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         partInvCol.setCellValueFactory(new PropertyValueFactory<>("inventory"));
         partCostCol.setCellValueFactory(new PropertyValueFactory<>("cost"));
 
-        productsTable.setItems(productList);
+        productsTable.setItems(Product.productList);
         productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         productInvCol.setCellValueFactory(new PropertyValueFactory<>("inventory"));
         productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
-    public void setState(ObservableList<Part> parts, ObservableList<Product> products) {
-        this.partsList = parts;
-        this.productList = products;
-        partsTable.setItems(partsList);
-        productsTable.setItems(productList);
+    public void updateState() {
+        partsTable.setItems(Part.partsList);
+        productsTable.setItems(Product.productList);
     }
 
     public void toAddPart(ActionEvent actionEvent) throws IOException {
@@ -94,7 +90,7 @@ public class MainController implements Initializable {
         Parent root = loader.load();
 
         AddProduct controller = loader.getController();
-        controller.setPartsList(partsList);
+        controller.setPartsList(Part.partsList);
 
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 480);
@@ -110,7 +106,7 @@ public class MainController implements Initializable {
         Parent root = loader.load();
 
         ModifyProduct controller = loader.getController();
-        controller.setPartsList(partsList);
+        controller.setPartsList(Part.partsList);
         // Send Highlighted Product
 
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
@@ -121,44 +117,44 @@ public class MainController implements Initializable {
 
     public void modify(Product product) {
         int index = -1;
-        for(int i = 0; i < productList.size(); i++) {
-            if (productList.get(i).getId() == product.getId()) {
+        for(int i = 0; i < Product.productList.size(); i++) {
+            if (Product.productList.get(i).getId() == product.getId()) {
                 index = i;
                 break;
             }
         }
         if (index == -1) {
-            productList.add(product);
+            Product.productList.add(product);
         } else {
-            productList.set(index, product);
+            Product.productList.set(index, product);
         }
     }
 
     public void modify(Part part) {
         int index = -1;
-        for(int i = 0; i < partsList.size(); i++) {
-            if (partsList.get(i).getId() == part.getId()) {
+        for(int i = 0; i < Part.partsList.size(); i++) {
+            if (Part.partsList.get(i).getId() == part.getId()) {
                 index = i;
                 break;
             }
         }
         if (index == -1) {
-            partsList.add(part);
+            Part.partsList.add(part);
         } else {
-            partsList.set(index, part);
+            Part.partsList.set(index, part);
         }
     }
 
     public void deletePart(ActionEvent actionEvent) {
         Part selectedPart = (Part)partsTable.getSelectionModel().getSelectedItem();
         if (selectedPart == null) return;
-        partsList.remove(selectedPart);
+        Part.partsList.remove(selectedPart);
     }
 
     public void deleteProduct(ActionEvent actionEvent) {
         Product selectedProduct = (Product)productsTable.getSelectionModel().getSelectedItem();
         if (selectedProduct == null) return;
-        productList.remove(selectedProduct);
+        Product.productList.remove(selectedProduct);
     }
 
     public void quit(ActionEvent actionEvent) {
@@ -167,9 +163,8 @@ public class MainController implements Initializable {
 
 
     public void partSearch(KeyEvent keyEvent) {
-        ObservableList<Part> searchList = FXCollections.observableArrayList();
         String query = partsQuery.getText().toLowerCase();
-        searchList = searchPartName(query);
+        ObservableList<Part> searchList = searchPartName(query);
         if (searchList.size() == 0) {
             try {
                 int queryId = Integer.parseInt(query);
@@ -187,7 +182,7 @@ public class MainController implements Initializable {
 
     private ObservableList<Part> searchPartName(String partialName) {
         ObservableList<Part> namedParts = FXCollections.observableArrayList();
-        for (Part p : partsList) {
+        for (Part p : Part.partsList) {
             if(p.getName().toLowerCase().contains(partialName)) {
                 namedParts.add(p);
             }
@@ -196,7 +191,7 @@ public class MainController implements Initializable {
     }
 
     private Part searchPartId(int id) {
-        for (Part p : partsList) {
+        for (Part p : Part.partsList) {
             if (p.getId() == id) {
                 return p;
             }
@@ -205,9 +200,8 @@ public class MainController implements Initializable {
     }
 
     public void productSearch(KeyEvent keyEvent) {
-        ObservableList<Product> searchList = FXCollections.observableArrayList();
         String query = productQuery.getText().toLowerCase();
-        searchList = searchProductName(query);
+        ObservableList<Product> searchList = searchProductName(query);
         if (searchList.size() == 0) {
             try {
                 int queryId = Integer.parseInt(query);
@@ -225,7 +219,7 @@ public class MainController implements Initializable {
 
     private  ObservableList<Product> searchProductName(String partialName) {
         ObservableList<Product> namedProducts = FXCollections.observableArrayList();
-        for (Product p : productList) {
+        for (Product p : Product.productList) {
             if(p.getName().toLowerCase().contains(partialName)) {
                 namedProducts.add(p);
             }
@@ -234,13 +228,12 @@ public class MainController implements Initializable {
     }
 
     private Product searchProductId(int id) {
-        for (Product p : productList) {
+        for (Product p : Product.productList) {
             if (p.getId() == id) {
                 return p;
             }
         }
         return null;
     }
-
 
 }
