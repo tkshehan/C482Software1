@@ -34,7 +34,6 @@ public class MainApplication extends Application {
     }
 
     private void initializeState(MainController controller) {
-        ObservableList<Product> productsList = FXCollections.observableArrayList();
 
         Part brakes = new InhousePart("Brakes", 14.99, 5, 1, 15, 1);
         Part seat = new OutsourcedPart( "Seat", 29.99, 4, 1, 10, "Seaters");
@@ -42,14 +41,12 @@ public class MainApplication extends Application {
 
 
         // Add parts for bikes
-        productsList.add(new Product(1000, "Road Bike", 5, 99.99, 1, 10,  new ArrayList<Part>(
+        new Product( "Road Bike", 5, 99.99, 1, 10,  new ArrayList<Part>(
                 Arrays.asList( brakes, seat, wheel, wheel)
-        )));
-        productsList.add(new Product(1001, "Unicycle", 2, 89.99, 1, 5, new ArrayList<Part>(
+        ));
+        new Product("Unicycle", 2, 89.99, 1, 5, new ArrayList<Part>(
                 Arrays.asList(brakes, seat, wheel)
-        )));
-
-        Product.productList = productsList;
+        ));
 
         controller.updateState();
     }

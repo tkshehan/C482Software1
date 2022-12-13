@@ -32,7 +32,7 @@ public abstract class Part {
                 .stream()
                 .map(Part::getId)
                 .collect(Collectors.toList());
-        for( int i = 0; ; i++) {
+        for( int i = 1; ; i++) {
             if(!idList.contains(i))
             return i;
         }

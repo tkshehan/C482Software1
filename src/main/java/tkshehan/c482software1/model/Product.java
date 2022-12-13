@@ -1,8 +1,10 @@
 package tkshehan.c482software1.model;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Product {
     private int id;
@@ -13,16 +15,19 @@ public class Product {
     private int max = 1;
     private ArrayList<Part> partsList = new ArrayList<>();
 
-    public static ObservableList<Product> productList;
+    public static ObservableList<Product> productList = FXCollections.observableArrayList();
 
-    public Product(int id, String name, int inventory, double price, int min, int max, ArrayList<Part> partsList) {
-    this.id = id;
+    public Product(String name, int inventory, double price, int min, int max, ArrayList<Part> partsList) {
+
+    this.id = newId();
     this.name = name;
     this.inventory = inventory;
     this.price = price;
     this.min = min;
     this.max = max;
     this.partsList = partsList;
+
+    productList.add(this);
     }
 
     public int getId() {return id;}
@@ -41,4 +46,17 @@ public class Product {
 
     public int getMax() {return max;}
     public void setMax(int max) {this.max = max;}
+
+    private int newId() {
+        ArrayList idList = (ArrayList) productList
+                .stream()
+                .map(Product::getId)
+                .collect(Collectors.toList());
+        for( int i = 1; ; i++) {
+            if(!idList.contains(i))
+                return 1000 + i;
+        }
+    }
 }
+
+

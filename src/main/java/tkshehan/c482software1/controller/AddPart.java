@@ -9,9 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import tkshehan.c482software1.model.InhousePart;
-import tkshehan.c482software1.model.Part;
+import tkshehan.c482software1.model.OutsourcedPart;
 
 import java.io.IOException;
 
@@ -27,6 +28,7 @@ public class AddPart {
     public TextField maxTF;
     public TextField originTF;
     public Button exitButton;
+    public Text errorText;
 
     public void savePart(ActionEvent actionEvent) {
         String errorMessage = "";
@@ -40,29 +42,51 @@ public class AddPart {
 
         try {
             inventory = Integer.parseInt(invTF.getText());
-            min = Integer.parseInt(minTF.getText());
-            max = Integer.parseInt(maxTF.getText());
-            price = Double.parseDouble(priceTF.getText());
-            if (inHouse.isSelected()) {
-                machineId = Integer.parseInt(origin);
-            }
         } catch (NumberFormatException e) {
-            // Values must be a number
-            errorMessage += "foo must be a number \n";
+            errorMessage += "Inventory must be a number\n";
+        }
+
+        try {
+            min = Integer.parseInt(minTF.getText());
+        } catch (NumberFormatException e) {
+            errorMessage += "Min must be a number\n";
+        }
+        try {
+            max = Integer.parseInt(maxTF.getText());
+        } catch (NumberFormatException e) {
+            errorMessage += "Max must be a number\n";
+        }
+        if (max < min) {
+            errorMessage += "Max must be greater or equal to Min\n";
+        }
+
+        try {
+            price = Double.parseDouble(priceTF.getText());
+        } catch (NumberFormatException e) {
+            errorMessage += "Price must be a double\n";
+        }
+
+        if (inHouse.isSelected()) {
+            try {
+                machineId = Integer.parseInt(origin);
+            } catch (NumberFormatException e) {
+                errorMessage += "MachineID must be a number\n";
+            }
         }
 
         if (name.length() == 0) {
             // Field empty
-            errorMessage += "Name is empty \n";
+            errorMessage += "Name must not be empty\n";
 
-        } else if (origin.length() == 0) {
+        }
+        if (outsourced.isSelected() && origin.length() == 0) {
             // Field empty
-            errorMessage += "CompanyName is empty \n";
+            errorMessage += "CompanyName must not be empty\n";
         }
 
         // Exit function if invalid
         if (errorMessage.length() > 0) {
-            //TODO display message
+            errorText.setText(errorMessage);
             return;
         }
 
@@ -70,7 +94,7 @@ public class AddPart {
         if (inHouse.isSelected()) {
             new InhousePart(name, price, inventory, min, max, machineId);
         } else {
-
+            new OutsourcedPart(name, price, inventory, min, max, origin);
         }
         exitButton.fire();
     }
