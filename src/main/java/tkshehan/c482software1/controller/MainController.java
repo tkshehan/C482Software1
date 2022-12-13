@@ -77,7 +77,7 @@ public class MainController implements Initializable {
         Parent root = loader.load();
 
         ModifyPart controller = loader.getController();
-        // Send Highlighted Part
+        controller.setPart(selectedPart);
 
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 480);
