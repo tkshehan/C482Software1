@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import tkshehan.c482software1.model.Inventory;
 import tkshehan.c482software1.model.Part;
 import tkshehan.c482software1.model.Product;
 
@@ -39,24 +40,21 @@ public class MainController implements Initializable {
     public TableColumn productPriceCol;
 
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        partsTable.setItems(Part.partsList);
+
+        partsTable.setItems(Inventory.getAllParts());
         partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        partInvCol.setCellValueFactory(new PropertyValueFactory<>("inventory"));
-        partCostCol.setCellValueFactory(new PropertyValueFactory<>("cost"));
+        partInvCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        partCostCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-        productsTable.setItems(Product.productList);
+        productsTable.setItems(Inventory.getAllProducts());
         productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        productInvCol.setCellValueFactory(new PropertyValueFactory<>("inventory"));
+        productInvCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-    }
-
-    public void updateState() {
-        partsTable.setItems(Part.partsList);
-        productsTable.setItems(Product.productList);
     }
 
     public void toAddPart(ActionEvent actionEvent) throws IOException {
@@ -89,9 +87,6 @@ public class MainController implements Initializable {
         FXMLLoader  loader = new FXMLLoader(getClass().getResource("/tkshehan/c482software1/add_product.fxml"));
         Parent root = loader.load();
 
-        AddProduct controller = loader.getController();
-        controller.setPartsList(Part.partsList);
-
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 480);
         stage.setScene(scene);
@@ -106,8 +101,7 @@ public class MainController implements Initializable {
         Parent root = loader.load();
 
         ModifyProduct controller = loader.getController();
-        controller.setPartsList(Part.partsList);
-        // Send Highlighted Product
+        controller.setProduct(selectedProduct);
 
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 480);
@@ -115,46 +109,26 @@ public class MainController implements Initializable {
         stage.show();
     }
 
-    public void modify(Product product) {
-        int index = -1;
-        for(int i = 0; i < Product.productList.size(); i++) {
-            if (Product.productList.get(i).getId() == product.getId()) {
-                index = i;
-                break;
-            }
-        }
-        if (index == -1) {
-            Product.productList.add(product);
-        } else {
-            Product.productList.set(index, product);
-        }
-    }
-
-    public void modify(Part part) {
-        int index = -1;
-        for(int i = 0; i < Part.partsList.size(); i++) {
-            if (Part.partsList.get(i).getId() == part.getId()) {
-                index = i;
-                break;
-            }
-        }
-        if (index == -1) {
-            Part.partsList.add(part);
-        } else {
-            Part.partsList.set(index, part);
-        }
-    }
-
     public void deletePart(ActionEvent actionEvent) {
         Part selectedPart = (Part)partsTable.getSelectionModel().getSelectedItem();
         if (selectedPart == null) return;
-        Part.partsList.remove(selectedPart);
+
+        for (Product product : Inventory.getAllProducts()) {
+            for(Part part : product.getAllAssociatedParts()) {
+                if (part == selectedPart) {
+                    //TODO display error
+                    return;
+                }
+            }
+        }
+        //TODO confirm box
+        Inventory.deletePart(selectedPart);
     }
 
     public void deleteProduct(ActionEvent actionEvent) {
         Product selectedProduct = (Product)productsTable.getSelectionModel().getSelectedItem();
         if (selectedProduct == null) return;
-        Product.productList.remove(selectedProduct);
+        Inventory.deleteProduct(selectedProduct);
     }
 
     public void quit(ActionEvent actionEvent) {
@@ -176,13 +150,12 @@ public class MainController implements Initializable {
                 // Ignore
             }
         }
-
         partsTable.setItems(searchList);
     }
 
     private ObservableList<Part> searchPartName(String partialName) {
         ObservableList<Part> namedParts = FXCollections.observableArrayList();
-        for (Part p : Part.partsList) {
+        for (Part p : Inventory.getAllParts()) {
             if(p.getName().toLowerCase().contains(partialName)) {
                 namedParts.add(p);
             }
@@ -191,7 +164,7 @@ public class MainController implements Initializable {
     }
 
     private Part searchPartId(int id) {
-        for (Part p : Part.partsList) {
+        for (Part p : Inventory.getAllParts()) {
             if (p.getId() == id) {
                 return p;
             }
@@ -213,13 +186,12 @@ public class MainController implements Initializable {
                 // Ignore
             }
         }
-
         productsTable.setItems(searchList);
     }
 
     private  ObservableList<Product> searchProductName(String partialName) {
         ObservableList<Product> namedProducts = FXCollections.observableArrayList();
-        for (Product p : Product.productList) {
+        for (Product p : Inventory.getAllProducts()) {
             if(p.getName().toLowerCase().contains(partialName)) {
                 namedProducts.add(p);
             }
@@ -228,7 +200,7 @@ public class MainController implements Initializable {
     }
 
     private Product searchProductId(int id) {
-        for (Product p : Product.productList) {
+        for (Product p : Inventory.getAllProducts()) {
             if (p.getId() == id) {
                 return p;
             }

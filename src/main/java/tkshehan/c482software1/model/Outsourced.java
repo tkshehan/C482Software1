@@ -1,10 +1,10 @@
 package tkshehan.c482software1.model;
 
-public class OutsourcedPart extends Part{
+public class Outsourced extends Part{
     private String companyName = "";
 
-    public OutsourcedPart(String name, double cost, int inventory, int min, int max, String companyName) {
-        super(name, cost, inventory, min, max);
+    public Outsourced(int id, String name, double cost, int stock, int min, int max, String companyName) {
+        super(id, name, cost, stock, min, max);
         this.companyName = companyName;
     }
 

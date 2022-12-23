@@ -11,8 +11,9 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import tkshehan.c482software1.model.InhousePart;
-import tkshehan.c482software1.model.OutsourcedPart;
+import tkshehan.c482software1.model.InHouse;
+import tkshehan.c482software1.model.Inventory;
+import tkshehan.c482software1.model.Outsourced;
 
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public class AddPart {
     public void savePart(ActionEvent actionEvent) {
         String errorMessage = "";
         String name = nameTF.getText().trim();
-        int inventory = 0;
+        int stock = 0;
         double price  = 0;
         int min  = 0;
         int max = 0;
@@ -41,7 +42,7 @@ public class AddPart {
         int machineId = 0;
 
         try {
-            inventory = Integer.parseInt(invTF.getText());
+            stock = Integer.parseInt(invTF.getText());
         } catch (NumberFormatException e) {
             errorMessage += "Inventory must be a number\n";
         }
@@ -58,7 +59,10 @@ public class AddPart {
         }
         if (max < min) {
             errorMessage += "Max must be greater or equal to Min\n";
+        } else if (stock < min || stock > min) {
+            errorMessage += "Inventory must be between Min and Max\n";
         }
+
 
         try {
             price = Double.parseDouble(priceTF.getText());
@@ -92,9 +96,9 @@ public class AddPart {
 
         // In-house or Outsourced?
         if (inHouse.isSelected()) {
-            new InhousePart(name, price, inventory, min, max, machineId);
+            Inventory.addPart(new InHouse(Inventory.getNextPartID(), name, price, stock, min, max, machineId));
         } else {
-            new OutsourcedPart(name, price, inventory, min, max, origin);
+            Inventory.addPart(new Outsourced(Inventory.getNextPartID(), name, price, stock, min, max, origin));
         }
         exitButton.fire();
     }

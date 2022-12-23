@@ -1,57 +1,109 @@
-package tkshehan.c482software1.model;
+package tkshehan.c482software1.model; /**
+ * Supplied class Part.java
+ */
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
-import java.util.ArrayList;
-import java.util.stream.Collectors;
-
+/**
+ *
+ * @author Place Your Name Here
+ */
 public abstract class Part {
-    private int id; //must be a unique number
-    private String name = ""; //must not be empty
-    private double cost = 00.00; //must be a double
-    private int inventory = 0;  //must be >= 0
-    private int max = 1; //must be greater than min
-    private int min = 0; //must be >= 0
-
-    public static ObservableList<Part> partsList = FXCollections.observableArrayList();
-
-    public Part(String name, double cost, int inventory, int min, int max) {
-        this.id = newId();
+    private int id;
+    private String name;
+    private double price;
+    private int stock;
+    private int min;
+    private int max;
+    public Part(int id, String name, double price, int stock, int min, int max) {
+        this.id = id;
         this.name = name;
-        this.cost = cost;
-        this.inventory = inventory;
+        this.price = price;
+        this.stock = stock;
         this.min = min;
         this.max = max;
-
-        partsList.add(this);
     }
 
-    private int newId() {
-        ArrayList idList = (ArrayList) partsList
-                .stream()
-                .map(Part::getId)
-                .collect(Collectors.toList());
-        for( int i = 1; ; i++) {
-            if(!idList.contains(i))
-            return i;
-        }
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
     }
 
-    public int getId() {return id;}
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public String getName() {return name;}
-    public void setName(String name) {this.name = name;}
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
 
-    public double getCost() {return cost;}
-    public void setCost(double cost) {this.cost = cost;}
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public int getInventory() {return inventory;}
-    public void setInventory(int inventory) {this.inventory = inventory;}
+    /**
+     * @return the price
+     */
+    public double getPrice() {
+        return price;
+    }
 
-    public int getMax() {return max;}
-    public void setMax(int max) {this.max = max;}
+    /**
+     * @param price the price to set
+     */
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
-    public int getMin() {return min;}
-    public void setMin(int min) {this.min = min;}
+    /**
+     * @return the stock
+     */
+    public int getStock() {
+        return stock;
+    }
+
+    /**
+     * @param stock the stock to set
+     */
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    /**
+     * @return the min
+     */
+    public int getMin() {
+        return min;
+    }
+
+    /**
+     * @param min the min to set
+     */
+    public void setMin(int min) {
+        this.min = min;
+    }
+
+    /**
+     * @return the max
+     */
+    public int getMax() {
+        return max;
+    }
+
+    /**
+     * @param max the max to set
+     */
+    public void setMax(int max) {
+        this.max = max;
+    }
+
 }

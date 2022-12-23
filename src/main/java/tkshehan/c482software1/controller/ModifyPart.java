@@ -11,8 +11,8 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import tkshehan.c482software1.model.InhousePart;
-import tkshehan.c482software1.model.OutsourcedPart;
+import tkshehan.c482software1.model.InHouse;
+import tkshehan.c482software1.model.Outsourced;
 import tkshehan.c482software1.model.Part;
 
 import java.io.IOException;
@@ -35,7 +35,7 @@ public class ModifyPart {
         // Validate Part
         String errorMessage = "";
         String name = nameTF.getText().trim();
-        int inventory = 0;
+        int stock = 0;
         double price  = 0;
         int min  = 0;
         int max = 0;
@@ -43,7 +43,7 @@ public class ModifyPart {
         int machineId = 0;
 
         try {
-            inventory = Integer.parseInt(invTF.getText());
+            stock = Integer.parseInt(invTF.getText());
         } catch (NumberFormatException e) {
             errorMessage += "Inventory must be a number\n";
         }
@@ -60,6 +60,8 @@ public class ModifyPart {
         }
         if (max < min) {
             errorMessage += "Max must be greater or equal to Min\n";
+        } else if (stock < min || stock > min) {
+            errorMessage += "Inventory must be between Min and Max\n";
         }
 
         try {
@@ -93,14 +95,14 @@ public class ModifyPart {
         }
         // Save Part and Return to Main
         part.setName(name);
-        part.setCost(price);
+        part.setPrice(price);
         part.setMin(min);
         part.setMax(max);
-        part.setInventory(inventory);
-        if (part instanceof OutsourcedPart) {
-            ((OutsourcedPart) part).setCompanyName(origin);
-        } else if (part instanceof  InhousePart) {
-            ((InhousePart) part).setMachineId(machineId);
+        part.setStock(stock);
+        if (part instanceof Outsourced) {
+            ((Outsourced) part).setCompanyName(origin);
+        } else if (part instanceof InHouse) {
+            ((InHouse) part).setMachineId(machineId);
         }
         exitButton.fire();
     }
@@ -109,17 +111,17 @@ public class ModifyPart {
 
         idTF.setText(String.valueOf(part.getId()));
         nameTF.setText(part.getName());
-        invTF.setText(String.valueOf(part.getInventory()));
-        priceTF.setText(String.valueOf(part.getCost()));
+        invTF.setText(String.valueOf(part.getStock()));
+        priceTF.setText(String.valueOf(part.getPrice()));
         minTF.setText(String.valueOf(part.getMin()));
         maxTF.setText(String.valueOf(part.getMax()));
 
-        if(part instanceof OutsourcedPart) {
+        if(part instanceof Outsourced) {
             outsourced.setSelected(true);
             sourceLabel.setText("Company Name");
-            originTF.setText(((OutsourcedPart) part).getCompanyName());
-        } else if (part instanceof  InhousePart) {
-            originTF.setText(String.valueOf(((InhousePart) part).getMachineId()));
+            originTF.setText(((Outsourced) part).getCompanyName());
+        } else if (part instanceof InHouse) {
+            originTF.setText(String.valueOf(((InHouse) part).getMachineId()));
         }
 
     }

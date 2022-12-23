@@ -3,40 +3,34 @@ package tkshehan.c482software1.model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
-import java.util.stream.Collectors;
-
 public class Product {
     private int id;
     private String name = "";
-    private int inventory = 0;
+    private int stock = 0;
     private double price = 00.00;
     private int min = 0;
     private int max = 1;
-    private ArrayList<Part> partsList = new ArrayList<>();
+    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
 
-    public static ObservableList<Product> productList = FXCollections.observableArrayList();
-
-    public Product(String name, int inventory, double price, int min, int max, ArrayList<Part> partsList) {
-
-    this.id = newId();
-    this.name = name;
-    this.inventory = inventory;
-    this.price = price;
-    this.min = min;
-    this.max = max;
-    this.partsList = partsList;
-
-    productList.add(this);
+    public Product(int id, String name, int stock, double price, int min, int max) {
+        this.id = id;
+        this.name = name;
+        this.stock = stock;
+        this.price = price;
+        this.min = min;
+        this.max = max;
     }
 
     public int getId() {return id;}
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {return name;}
     public void setName(String name) {this.name = name;}
 
-    public int getInventory() {return inventory;}
-    public void setInventory(int inventory) {this.inventory = inventory;}
+    public int getStock() {return stock;}
+    public void setStock(int inventory) {this.stock = stock;}
 
     public double getPrice() {return price;}
     public void setPrice(double price) {this.price = price;}
@@ -47,15 +41,18 @@ public class Product {
     public int getMax() {return max;}
     public void setMax(int max) {this.max = max;}
 
-    private int newId() {
-        ArrayList idList = (ArrayList) productList
-                .stream()
-                .map(Product::getId)
-                .collect(Collectors.toList());
-        for( int i = 1; ; i++) {
-            if(!idList.contains(i))
-                return 1000 + i;
-        }
+    public void addAssociatedPart(Part part) {
+        associatedParts.add(part);
+    }
+    public boolean deleteAssociatedPart(Part part) {
+        return associatedParts.remove(part);
+    }
+    public ObservableList<Part> getAllAssociatedParts() {
+        return associatedParts;
+    }
+
+    public void setAllAssociatedParts(ObservableList<Part> parts) {
+        associatedParts = parts;
     }
 }
 

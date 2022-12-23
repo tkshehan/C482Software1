@@ -1,20 +1,13 @@
 package tkshehan.c482software1;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import tkshehan.c482software1.controller.MainController;
-import tkshehan.c482software1.model.InhousePart;
-import tkshehan.c482software1.model.OutsourcedPart;
-import tkshehan.c482software1.model.Part;
-import tkshehan.c482software1.model.Product;
+import tkshehan.c482software1.model.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MainApplication extends Application {
     @Override
@@ -35,20 +28,29 @@ public class MainApplication extends Application {
 
     private void initializeState(MainController controller) {
 
-        Part brakes = new InhousePart("Brakes", 14.99, 5, 1, 15, 1);
-        Part seat = new OutsourcedPart( "Seat", 29.99, 4, 1, 10, "Seaters");
-        Part wheel = new InhousePart("Wheel", 9.99, 15, 5, 20, 2);
+        Part brakes = new InHouse(Inventory.getNextPartID(), "Brakes", 14.99, 5, 1, 15, 1);
+        Part seat = new Outsourced( Inventory.getNextPartID(), "Seat", 29.99, 4, 1, 10, "Seaters");
+        Part wheel = new InHouse(Inventory.getNextPartID(), "Wheel", 9.99, 15, 5, 20, 2);
 
+        Inventory.addPart(brakes);
+        Inventory.addPart(seat);
+        Inventory.addPart(wheel);
 
         // Add parts for bikes
-        new Product( "Road Bike", 5, 99.99, 1, 10,  new ArrayList<Part>(
-                Arrays.asList( brakes, seat, wheel, wheel)
-        ));
-        new Product("Unicycle", 2, 89.99, 1, 5, new ArrayList<Part>(
-                Arrays.asList(brakes, seat, wheel)
-        ));
+        Product bike = new Product(Inventory.getNextProductId(), "Road Bike", 5, 99.99, 1, 10);
+        bike.addAssociatedPart(brakes);
+        bike.addAssociatedPart(seat);
+        bike.addAssociatedPart(wheel);
+        bike.addAssociatedPart(wheel);
 
-        controller.updateState();
+        Product uni = new Product(Inventory.getNextProductId(), "Unicycle", 2, 89.99, 1, 5);
+        uni.addAssociatedPart(brakes);
+        uni.addAssociatedPart(seat);
+        uni.addAssociatedPart(wheel);
+
+        Inventory.addProduct(bike);
+        Inventory.addProduct(uni);
+
     }
 }
 
