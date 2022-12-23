@@ -9,9 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -21,6 +19,7 @@ import tkshehan.c482software1.model.Product;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -116,19 +115,30 @@ public class MainController implements Initializable {
         for (Product product : Inventory.getAllProducts()) {
             for(Part part : product.getAllAssociatedParts()) {
                 if (part == selectedPart) {
-                    //TODO display error
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Error: Part In Use");
+                    alert.setContentText("Parts currently associated with Products cannot be deleted");
+                    alert.showAndWait();
                     return;
                 }
             }
         }
-        //TODO confirm box
-        Inventory.deletePart(selectedPart);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will delete " + selectedPart.getName() + ". \n Do you want to continue?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            Inventory.deletePart(selectedPart);
+        }
     }
 
     public void deleteProduct(ActionEvent actionEvent) {
         Product selectedProduct = (Product)productsTable.getSelectionModel().getSelectedItem();
         if (selectedProduct == null) return;
-        Inventory.deleteProduct(selectedProduct);
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will delete " + selectedProduct.getName() + ". \n Do you want to continue?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            Inventory.deleteProduct(selectedProduct);
+        }
     }
 
     public void quit(ActionEvent actionEvent) {
