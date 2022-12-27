@@ -142,7 +142,12 @@ public class MainController implements Initializable {
     }
 
     public void quit(ActionEvent actionEvent) {
-        Platform.exit();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            Platform.exit();
+        }
+
     }
 
 

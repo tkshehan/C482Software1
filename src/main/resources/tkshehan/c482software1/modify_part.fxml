@@ -15,11 +15,11 @@
                             <font>
                                 <Font name="System Bold" size="13.0" />
                             </font></Label>
-                        <RadioButton fx:id="inHouse" disable="true" mnemonicParsing="false" selected="true" text="In-House">
+                        <RadioButton fx:id="inHouse" mnemonicParsing="false" onAction="#onInHouse" selected="true" text="In-House">
                             <toggleGroup>
                                 <ToggleGroup fx:id="origin" />
                             </toggleGroup></RadioButton>
-                        <RadioButton fx:id="outsourced" disable="true" mnemonicParsing="false" text="Outsourced" toggleGroup="$origin" />
+                        <RadioButton fx:id="outsourced" mnemonicParsing="false" onAction="#onOutsourced" text="Outsourced" toggleGroup="$origin" />
                     </children>
                     <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

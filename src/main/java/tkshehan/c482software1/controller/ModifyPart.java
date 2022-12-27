@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import tkshehan.c482software1.model.InHouse;
+import tkshehan.c482software1.model.Inventory;
 import tkshehan.c482software1.model.Outsourced;
 import tkshehan.c482software1.model.Part;
 
@@ -60,7 +61,7 @@ public class ModifyPart {
         }
         if (max < min) {
             errorMessage += "Max must be greater or equal to Min\n";
-        } else if (stock < min || stock > min) {
+        } else if (stock < min || stock > max) {
             errorMessage += "Inventory must be between Min and Max\n";
         }
 
@@ -93,16 +94,18 @@ public class ModifyPart {
             errorText.setText(errorMessage);
             return;
         }
+
         // Save Part and Return to Main
-        part.setName(name);
-        part.setPrice(price);
-        part.setMin(min);
-        part.setMax(max);
-        part.setStock(stock);
-        if (part instanceof Outsourced) {
-            ((Outsourced) part).setCompanyName(origin);
-        } else if (part instanceof InHouse) {
-            ((InHouse) part).setMachineId(machineId);
+        Part newPart;
+        if (inHouse.isSelected()) {
+            newPart = new InHouse(part.getId(), name, price, stock, min, max, machineId);
+        } else {
+            newPart = new Outsourced(part.getId(), name, price, stock, min, max, origin);
+        }
+        for(int i = 0; i < Inventory.getAllParts().size(); i++) {
+            if(part == Inventory.getAllParts().get(i)) {
+                Inventory.updatePart(i, newPart);
+            }
         }
         exitButton.fire();
     }
@@ -131,5 +134,15 @@ public class ModifyPart {
         Scene scene = new Scene(root, 1000, 480);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void onInHouse(ActionEvent actionEvent) {
+        sourceLabel.setText("Machine ID");
+        originTF.setText("");
+    }
+
+    public void onOutsourced(ActionEvent actionEvent) {
+        sourceLabel.setText("Company Name");
+        originTF.setText("");
     }
 }
