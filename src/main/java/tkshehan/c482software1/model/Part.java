@@ -4,7 +4,7 @@ package tkshehan.c482software1.model; /**
 
 /**
  *
- * @author Place Your Name Here
+ * @author Thomas Shehan
  */
 public abstract class Part {
     private int id;

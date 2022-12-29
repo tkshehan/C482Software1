@@ -1,5 +1,8 @@
 package tkshehan.c482software1.model;
 
+/**
+ * This class models InHouse made Parts.
+ */
 public class InHouse extends Part {
     private int machineId;
 
@@ -8,10 +11,18 @@ public class InHouse extends Part {
         this.machineId = machineId;
     }
 
+    /**
+     * This method returns the Part Machine ID.
+     * @return the machineID.
+     */
     public int getMachineId() {
         return machineId;
     }
 
+    /**
+     * This method sets the Machine ID.
+     * @param machineId The ID to set.
+     */
     public void setMachineId(int machineId) {
         this.machineId = machineId;
     }
