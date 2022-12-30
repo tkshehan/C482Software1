@@ -17,8 +17,10 @@ import tkshehan.c482software1.model.Outsourced;
 
 import java.io.IOException;
 
+/**
+ * This class controllers the add_part view.
+ */
 public class AddPart {
-
     public RadioButton inHouse;
     public RadioButton outsourced;
     public Label sourceLabel;
@@ -31,6 +33,10 @@ public class AddPart {
     public Button exitButton;
     public Text errorText;
 
+    /**
+     * This method validates the fields, saves the new part, then returns to the main view if successful.
+     * @param actionEvent An action taken by the user.
+     */
     public void savePart(ActionEvent actionEvent) {
         String errorMessage = "";
         String name = nameTF.getText().trim();
@@ -103,6 +109,11 @@ public class AddPart {
         exitButton.fire();
     }
 
+    /**
+     * This method returns the application to the main view.
+     * @param actionEvent An action taken by the user.
+     * @throws IOException
+     */
     public void toMain(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/tkshehan/c482software1/main.fxml"));
         Parent root = loader.load();
@@ -112,10 +123,18 @@ public class AddPart {
         stage.show();
     }
 
+    /**
+     * This method sets the origin label to "Machine ID".
+     * @param actionEvent An action taken by the user.
+     */
     public void onInHouse(ActionEvent actionEvent) {
         sourceLabel.setText("Machine ID");
     }
 
+    /**
+     * This method sets the origin label to "Company Name".
+     * @param actionEvent An action taken by the user.
+     */
     public void onOutsourced(ActionEvent actionEvent) {
         sourceLabel.setText("Company Name");
     }

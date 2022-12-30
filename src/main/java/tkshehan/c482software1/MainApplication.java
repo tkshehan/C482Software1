@@ -4,29 +4,42 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import tkshehan.c482software1.controller.MainController;
 import tkshehan.c482software1.model.*;
 
 import java.io.IOException;
 
+/**
+ * This class launches the application.
+ */
 public class MainApplication extends Application {
+    /**
+     * This method loads the first view.
+     * @param stage
+     * @throws IOException
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 480);
 
-        MainController controller = fxmlLoader.getController();
-        initializeState(controller);
+        initializeState();
 
         stage.setScene(scene);
         stage.show();
     }
 
+    /**
+     * This is the first method called when the application starts.
+     * @param args
+     */
     public static void main(String[] args) {
         launch();
     }
 
-    private void initializeState(MainController controller) {
+    /**
+     * This method loads and sets the initial state of the inventory.
+     */
+    private void initializeState() {
 
         Part brakes = new InHouse(Inventory.getNextPartID(), "Brakes", 14.99, 5, 1, 15, 1);
         Part seat = new Outsourced( Inventory.getNextPartID(), "Seat", 29.99, 4, 1, 10, "Seaters");
@@ -36,7 +49,7 @@ public class MainApplication extends Application {
         Inventory.addPart(seat);
         Inventory.addPart(wheel);
 
-        // Add parts for bikes
+        // Add parts to bikes
         Product bike = new Product(Inventory.getNextProductId(), "Road Bike", 5, 99.99, 1, 10);
         bike.addAssociatedPart(brakes);
         bike.addAssociatedPart(seat);

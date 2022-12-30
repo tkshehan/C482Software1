@@ -1,7 +1,6 @@
 package tkshehan.c482software1.controller;
 
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +21,9 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * This class controls the main view of the application.
+ */
 public class MainController implements Initializable {
 
     public TextField partsQuery;
@@ -39,7 +41,11 @@ public class MainController implements Initializable {
     public TableColumn productPriceCol;
 
 
-
+    /**
+     * This method associates the table columns with the appropriate data.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -56,6 +62,11 @@ public class MainController implements Initializable {
         productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
+    /**
+     * This method moves the application to the add_part view.
+     * @param actionEvent An action from the user.
+     * @throws IOException
+     */
     public void toAddPart(ActionEvent actionEvent) throws IOException {
         FXMLLoader  loader = new FXMLLoader(getClass().getResource("/tkshehan/c482software1/add_part.fxml"));
         Parent root = loader.load();
@@ -66,6 +77,11 @@ public class MainController implements Initializable {
         stage.show();
     }
 
+    /**
+     * This method moves the application to the modify_part view, using the selected part.
+     * @param actionEvent An action from the user.
+     * @throws IOException
+     */
     public void toModifyPart(ActionEvent actionEvent) throws IOException {
         Part selectedPart = (Part)partsTable.getSelectionModel().getSelectedItem();
         if (selectedPart == null) return;
@@ -82,6 +98,11 @@ public class MainController implements Initializable {
         stage.show();
     }
 
+    /**
+     * This method moves the application to the add_product view.
+     * @param actionEvent An action from the user.
+     * @throws IOException
+     */
     public void toAddProduct(ActionEvent actionEvent) throws IOException {
         FXMLLoader  loader = new FXMLLoader(getClass().getResource("/tkshehan/c482software1/add_product.fxml"));
         Parent root = loader.load();
@@ -92,6 +113,11 @@ public class MainController implements Initializable {
         stage.show();
     }
 
+    /**
+     * This method moves the application to the modify_product view, using the selected product.
+     * @param actionEvent An action from the user.
+     * @throws IOException
+     */
     public void toModifyProduct(ActionEvent actionEvent) throws IOException {
         Product selectedProduct = (Product)productsTable.getSelectionModel().getSelectedItem();
         if (selectedProduct == null) return;
@@ -108,6 +134,11 @@ public class MainController implements Initializable {
         stage.show();
     }
 
+    /**
+     * This method deletes a selected part from the inventory, after confirmation.
+     * The part must not be used in any products.
+     * @param actionEvent An action from the user.
+     */
     public void deletePart(ActionEvent actionEvent) {
         Part selectedPart = (Part)partsTable.getSelectionModel().getSelectedItem();
         if (selectedPart == null) return;
@@ -130,6 +161,10 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * This method deletes a product from the inventory, after confirmation.
+     * @param actionEvent An action from the user.
+     */
     public void deleteProduct(ActionEvent actionEvent) {
         Product selectedProduct = (Product)productsTable.getSelectionModel().getSelectedItem();
         if (selectedProduct == null) return;
@@ -141,6 +176,10 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * This method exits the application, after confirmation.
+     * @param actionEvent An action from the user.
+     */
     public void quit(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit?");
         Optional<ButtonType> result = alert.showAndWait();
@@ -151,13 +190,17 @@ public class MainController implements Initializable {
     }
 
 
+    /**
+     * This method searches for parts by the string input in partsQuery.
+     * @param keyEvent A keypress from the user.
+     */
     public void partSearch(KeyEvent keyEvent) {
         String query = partsQuery.getText().toLowerCase();
-        ObservableList<Part> searchList = searchPartName(query);
+        ObservableList<Part> searchList = Inventory.lookupPart(query);
         if (searchList.size() == 0) {
             try {
                 int queryId = Integer.parseInt(query);
-                Part p = searchPartId(queryId);
+                Part p = Inventory.lookupPart(queryId);
                 if (p != null) {
                     searchList.add(p);
                 }
@@ -168,32 +211,17 @@ public class MainController implements Initializable {
         partsTable.setItems(searchList);
     }
 
-    private ObservableList<Part> searchPartName(String partialName) {
-        ObservableList<Part> namedParts = FXCollections.observableArrayList();
-        for (Part p : Inventory.getAllParts()) {
-            if(p.getName().toLowerCase().contains(partialName)) {
-                namedParts.add(p);
-            }
-        }
-        return namedParts;
-    }
-
-    private Part searchPartId(int id) {
-        for (Part p : Inventory.getAllParts()) {
-            if (p.getId() == id) {
-                return p;
-            }
-        }
-        return null;
-    }
-
+    /**
+     * This method searches for products by the string input in productQuery.
+     * @param keyEvent A keypress from the user.
+     */
     public void productSearch(KeyEvent keyEvent) {
         String query = productQuery.getText().toLowerCase();
-        ObservableList<Product> searchList = searchProductName(query);
+        ObservableList<Product> searchList = Inventory.lookupProduct(query);
         if (searchList.size() == 0) {
             try {
                 int queryId = Integer.parseInt(query);
-                Product p = searchProductId(queryId);
+                Product p = Inventory.lookupProduct(queryId);
                 if (p != null) {
                     searchList.add(p);
                 }
@@ -203,24 +231,4 @@ public class MainController implements Initializable {
         }
         productsTable.setItems(searchList);
     }
-
-    private  ObservableList<Product> searchProductName(String partialName) {
-        ObservableList<Product> namedProducts = FXCollections.observableArrayList();
-        for (Product p : Inventory.getAllProducts()) {
-            if(p.getName().toLowerCase().contains(partialName)) {
-                namedProducts.add(p);
-            }
-        }
-        return  namedProducts;
-    }
-
-    private Product searchProductId(int id) {
-        for (Product p : Inventory.getAllProducts()) {
-            if (p.getId() == id) {
-                return p;
-            }
-        }
-        return null;
-    }
-
 }

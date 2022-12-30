@@ -18,6 +18,9 @@ import tkshehan.c482software1.model.Part;
 
 import java.io.IOException;
 
+/**
+ * This class controls the modify_part view.
+ */
 public class ModifyPart {
     public RadioButton inHouse;
     public RadioButton outsourced;
@@ -32,6 +35,11 @@ public class ModifyPart {
     public Button exitButton;
     public TextField idTF;
     private Part part;
+
+    /**
+     * This method validates the fields, saves the part, then returns to the main view if successful.
+     * @param actionEvent An action from the user.
+     */
     public void savePart(ActionEvent actionEvent) {
         // Validate Part
         String errorMessage = "";
@@ -109,6 +117,11 @@ public class ModifyPart {
         }
         exitButton.fire();
     }
+
+    /**
+     * This method sets the part to modify, and fills in the text fields with the data.
+     * @param part The part to set.
+     */
     public void setPart (Part part) {
         this.part = part;
 
@@ -128,6 +141,12 @@ public class ModifyPart {
         }
 
     }
+
+    /**
+     * This method returns the application to the main view.
+     * @param actionEvent
+     * @throws IOException
+     */
     public void toMain(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/tkshehan/c482software1/main.fxml"));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
@@ -136,11 +155,19 @@ public class ModifyPart {
         stage.show();
     }
 
+    /**
+     * This method sets the origin label to "Machine ID".
+     * @param actionEvent An action from the user.
+     */
     public void onInHouse(ActionEvent actionEvent) {
         sourceLabel.setText("Machine ID");
         originTF.setText("");
     }
 
+    /**
+     * This method sets the origin label to "Company Name".
+     * @param actionEvent An action from the user.
+     */
     public void onOutsourced(ActionEvent actionEvent) {
         sourceLabel.setText("Company Name");
         originTF.setText("");

@@ -24,6 +24,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * This class controls the modify_product view.
+ */
 public class ModifyProduct implements Initializable {
     public TableView allPartsTable;
     public TableColumn allPartsIdCol;
@@ -48,6 +51,10 @@ public class ModifyProduct implements Initializable {
     private ObservableList<Part> associatedPartsList = FXCollections.observableArrayList();
     private Product product;
 
+    /**
+     * This method adds a selected part to the associated parts.
+     * @param actionEvent An action from the user.
+     */
     public void addAssociatedPart(ActionEvent actionEvent) {
         Part selectedPart = (Part) allPartsTable.getSelectionModel().getSelectedItem();
 
@@ -55,6 +62,10 @@ public class ModifyProduct implements Initializable {
         associatedPartsList.add(selectedPart);
     }
 
+    /**
+     * This method removes a selected part to the associated parts.
+     * @param actionEvent An action from the user.
+     */
     public void removeAssociatedPart(ActionEvent actionEvent) {
         Part selectedPart = (Part) asPartsTable.getSelectionModel().getSelectedItem();
 
@@ -62,6 +73,10 @@ public class ModifyProduct implements Initializable {
         associatedPartsList.remove(selectedPart);
     }
 
+    /**
+     *This method validates the fields, saves the product, then returns to the main view if successful.
+     * @param actionEvent An action from the user.
+     */
     public void saveProduct(ActionEvent actionEvent) {
         // Validate Product
         String errorMessage = "";
@@ -121,6 +136,11 @@ public class ModifyProduct implements Initializable {
         exitButton.fire();
     }
 
+    /**
+     * This method returns the application to the main view.
+     * @param actionEvent
+     * @throws IOException
+     */
     public void toMain(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/tkshehan/c482software1/main.fxml"));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -129,6 +149,10 @@ public class ModifyProduct implements Initializable {
         stage.show();
     }
 
+    /**
+     *  This method sets the product to modify, and fills in the text fields with its data.
+     * @param product The product to set.
+     */
     public void setProduct(Product product) {
         this.product = product;
         idTF.setText(String.valueOf(product.getId()));
@@ -141,6 +165,11 @@ public class ModifyProduct implements Initializable {
         associatedPartsList.setAll(product.getAllAssociatedParts());
     }
 
+    /**
+     * This method associates the table columns with the appropriate data.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         allPartsTable.setItems(Inventory.getAllParts());
@@ -157,13 +186,17 @@ public class ModifyProduct implements Initializable {
         asPartsCostCol.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
+    /**
+     * This method searches for parts by the string input in partsQuery.
+     * @param keyEvent A keypress in the partsQuery field.
+     */
     public void searchParts(KeyEvent keyEvent) {
         String query = partsQuery.getText().toLowerCase();
-        ObservableList<Part> searchList = searchPartName(query);
+        ObservableList<Part> searchList = Inventory.lookupPart(query);
         if (searchList.size() == 0) {
             try {
                 int queryId = Integer.parseInt(query);
-                Part p = searchPartId(queryId);
+                Part p = Inventory.lookupPart(queryId);
                 if (p != null) {
                     searchList.add(p);
                 }
@@ -172,24 +205,5 @@ public class ModifyProduct implements Initializable {
             }
         }
         allPartsTable.setItems(searchList);
-    }
-
-    private ObservableList<Part> searchPartName(String partialName) {
-        ObservableList<Part> namedParts = FXCollections.observableArrayList();
-        for (Part p : Inventory.getAllParts()) {
-            if(p.getName().toLowerCase().contains(partialName)) {
-                namedParts.add(p);
-            }
-        }
-        return namedParts;
-    }
-
-    private Part searchPartId(int id) {
-        for (Part p : Inventory.getAllParts()) {
-            if (p.getId() == id) {
-                return p;
-            }
-        }
-        return null;
     }
 }
