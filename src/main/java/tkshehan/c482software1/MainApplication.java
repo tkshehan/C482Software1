@@ -9,7 +9,9 @@ import tkshehan.c482software1.model.*;
 import java.io.IOException;
 
 /**
- * This class launches the application.
+ * This class launches the application. <BR />
+ * <BR />
+ * FUTURE ENHANCEMENTS: When trying to delete a part associated with products, provide a list of products associated with it.
  */
 public class MainApplication extends Application {
     /**
@@ -28,6 +30,7 @@ public class MainApplication extends Application {
         stage.show();
     }
 
+    // Javadoc is located inside C482Software1/Javadoc
     /**
      * This is the first method called when the application starts.
      * @param args

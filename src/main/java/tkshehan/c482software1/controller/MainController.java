@@ -78,7 +78,10 @@ public class MainController implements Initializable {
     }
 
     /**
-     * This method moves the application to the modify_part view, using the selected part.
+     * This method moves the application to the modify_part view, using the selected part. <br />
+     * <br />
+     * RUNTIME ERROR: Cannot invoke "tkshehan.c482software1.model.Part.getId()" because "part" is null. <br />
+     * Fixed by checking for null before moving to modify part screen.
      * @param actionEvent An action from the user.
      * @throws IOException
      */
