@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * This class launches the application. <BR />
  * <BR />
- * FUTURE ENHANCEMENTS: When trying to delete a part associated with products, provide a list of products associated with it.
+ * FUTURE ENHANCEMENT: When trying to delete a product with associated parts, list the parts and give the option to remove them from the delete menu.
  */
 public class MainApplication extends Application {
     /**

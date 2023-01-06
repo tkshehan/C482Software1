@@ -109,7 +109,7 @@ public class ModifyProduct implements Initializable {
         }
         if (max < min) {
             errorMessage += "Max must be greater or equal to Min\n";
-        } else if (stock < min || stock > min) {
+        } else if (stock < min || stock > max) {
             errorMessage += "Inventory must be between Min and Max\n";
         }
 

@@ -146,17 +146,6 @@ public class MainController implements Initializable {
         Part selectedPart = (Part)partsTable.getSelectionModel().getSelectedItem();
         if (selectedPart == null) return;
 
-        for (Product product : Inventory.getAllProducts()) {
-            for(Part part : product.getAllAssociatedParts()) {
-                if (part == selectedPart) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Error: Part In Use");
-                    alert.setContentText("Parts currently associated with Products cannot be deleted");
-                    alert.showAndWait();
-                    return;
-                }
-            }
-        }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will delete " + selectedPart.getName() + ". \n Do you want to continue?");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
@@ -171,6 +160,14 @@ public class MainController implements Initializable {
     public void deleteProduct(ActionEvent actionEvent) {
         Product selectedProduct = (Product)productsTable.getSelectionModel().getSelectedItem();
         if (selectedProduct == null) return;
+
+        if (selectedProduct.getAllAssociatedParts().size() != 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error: Product In Use");
+            alert.setContentText("Products currently associated with parts cannot be deleted");
+            alert.showAndWait();
+            return;
+        }
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will delete " + selectedProduct.getName() + ". \n Do you want to continue?");
         Optional<ButtonType> result = alert.showAndWait();
